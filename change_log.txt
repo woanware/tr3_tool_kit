@@ -1,0 +1,54 @@
+TR3Secure Volatile Data Collection Kit Changelog
+
+10-26-14
+	- replaced robocopy with xcopy to collect antivirus logs. At times robocopy caused an unexpected error in this section
+
+10-25-14
+	- added tool ExtractUsnJrnl and lines to extract the NTFS Change Journal
+	- added menu option to extract only NTFS artifacts
+		- modified numbering for previous option 5 to make it 6
+
+08-19-14
+	- dropped support for using the pv program located at http://www.teamcti.com/pview/prcview.htm since it is no longer available
+	- updated the process report numbering to reflect dropping pv.exe
+
+09-24-13
+	- corrected the DEFAULT hive being collected in the RegBack folder for 32-bit systems
+
+08-16-13
+	- changed tools\pvc.exe -e  to tools\pv.exe -e  (error found by A. Chryssanthou )
+	- fixed missing parameter (A) in the robocopy command /copy:DATSOU (error found by A. Chryssanthou )
+	- changed to Currprocess to Cprocess to reflect the program name when its downloaded
+	- replaced robocopy /copy:DATSOU with /copy:DAT (Owner, security and auditing info not needed)
+	- added line to account for single digit hour since Windows uses a space and not a zero
+	- incorporated Windows Environment Variables (idea by Troy Larson)
+		* %homedrive% = C:
+		* %homepath% = \Documents and Settings\username or \Users\username
+		* %systemdrive% = C:
+		* %systemroot% = C:\Windows
+		* %userprofile% = %systemdrive%\Documents and Settings\username or %systemdrive%\Users\username
+		* %windir% = C:\Windows
+	- removed the documenting time skew for complete automation
+	- added command-line functionality and removed GUI prompts (again for complete automation)
+	- preservation added preserving the active profile's ntuser.dat (Troy Larson idea) and RecentFileCache.bcf
+	- replaced Mandiant's Memoryze with winpmem.exe
+	- added check to determine whether the system is 32 or 64 bit for certain tools 
+	- used rawcopy to obtain protected files
+	- Non-volatile data collection added
+		* Partition information
+		* MBR
+		* Hard drive section from MBR to first partition
+		* All registry hives
+		* Registry hives in RegBack folder (Windows 7 only)
+		* All user profile registry hives
+		* Scheduled tasks information including the logs
+		* Installed drivers information
+		* Event logs and Windows 7 Log folder
+		* NTFS artifacts $MFT and $Logfile ($UsnJrnl collection is difficult with rawcopy)
+		* anti-virus log and quarantine folder (McAfee is used as an example)
+		* Group policies
+		
+
+	
+
+	
